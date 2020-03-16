@@ -10,15 +10,13 @@
 |	http://codeigniter.com/user_guide/libraries/email.html
 |
 */
-$config['protocol'] = "smtp";
-$config['smtp_host'] = "ssl://smtp.googlemail.com";
-$config['smtp_port'] = "465";
-$config['smtp_user'] = "sevenoceanbank@gmail.com"; 
-$config['smtp_pass'] = "ssbNY9WDB5G";
-$config['charset'] = "utf-8";
-$config['mailtype'] = "html";
-$config['newline'] = "\r\n";
 
+$config['protocol'] = "smtp";
+$config['smtp_host'] = "send.one.com";
+$config['smtp_port'] = "25";
+$config['smtp_user'] = "info@vvsoffert.se"; 
+//$config['smtp_pass'] = 'Vv$offert@123';
+$config['smtp_pass'] = 'V64pacitygross';
 $config['charset'] = "utf-8";
 $config['mailtype'] = "html";
 $config['newline'] = "\r\n";

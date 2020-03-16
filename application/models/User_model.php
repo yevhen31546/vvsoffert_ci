@@ -28,6 +28,9 @@ class User_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+    
+    
+
 	
 	// get data by id
     function get_by_where($search,$single = false)
@@ -119,7 +122,7 @@ class User_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
-
+    
 }
 
 /* End of file User_model.php */

@@ -1,3 +1,14 @@
+<?php
+
+	if ($_SERVER['HTTPS'] != "on") {
+
+	    $url = "https://". $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	    header("Location: $url");
+	    exit;
+
+	}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +69,7 @@
     <div class="footer">
       <div class="footer-inner clearfix">
         <div class="container">
-          <div class="footer-line-left"> © 2017 Vvsoffert.se. All rights reserved. </div>
+          <div class="footer-line-left"> © 2018 Vvsoffert.se. All rights reserved. </div>
         </div>
         <!-- /.container --> 
       </div>

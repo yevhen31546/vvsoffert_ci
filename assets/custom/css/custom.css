@@ -1,0 +1,43 @@
+.pagination.cust-pagination{margin: 0;}
+
+.input-group.cust-img-upload-btn .input-group-addon {
+    display: inline-block;
+    background: #841717;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 14px;
+    padding-right: 10px;
+    border: 1px solid #841717;
+    cursor: pointer;
+}
+
+.view_upload_image img.img-preview{
+    height: 160px;
+    float: right;
+}
+
+.has-error .help-block{color: red;}
+
+.noDisplay{display: none !important;}
+
+.search_loader{
+    position: absolute;
+    z-index: 9999999;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.search_loader span{
+    z-index: 999999;
+    background: rgba(247, 73, 73, 0.69) !important;
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+}
+

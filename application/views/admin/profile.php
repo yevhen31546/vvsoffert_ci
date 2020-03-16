@@ -14,7 +14,6 @@
         <!-- /.box-title -->
         <div class="row">
           <div class="col-lg-6"> <?php echo form_open(); ?>
-          	<?php show_session_message(); ?>
             <div class="form-group">
               <label for="exampleInputEmail1">Website Name</label>
               <input type="text" class="form-control" name="sitename" value="<?php echo set_value('sitename',html_entity_decode($userInfo->sitename)); ?>">
