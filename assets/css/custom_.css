@@ -1,0 +1,241 @@
+
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+	z-index:99;
+}
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
+}
+
+.hide{
+	display:none !important;
+}
+.pad-5{
+	padding:0px 12px;
+}
+.hero-simple {
+	height: 450px;
+}
+.hero-simple-actions .input-group-addon.no-border {
+	border-radius: 10px;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+}
+.hero-simple-actions .input-group-addon ~ .form-control {
+	border-radius: 10px;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+}
+.category-column ul a.active{
+	    color: #F74949;
+    text-decoration: none;
+}
+/*.category-column ul a:after{
+		content:'';
+	}*/
+.tag.listing-box-category{
+	position:relative;
+	left:auto;
+	bottom:auto;
+	margin-bottom:10px;
+}
+.tag.listing-box-category a{
+	color:#fff;
+	display:block;
+}
+.tag.listing-box-category a:hover{
+	text-decoration:none;
+}
+.listing-box {
+	border: 1px solid #fff;
+	background-color: #fff;
+}
+.listing-box-content {
+    position: relative;
+    padding: 12px 12px 12px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin: 0px 0px 12px 0px;
+}
+.listing-box-image-content{
+	background-size: 60%;
+	background-color: #fff;
+}
+.listing-compare-image-link {
+	background-size: contain;
+	background-color: #fff;
+}
+.listing-box-image-content:after {
+	display: none
+}
+
+.category-column ul a {
+	word-break: break-word;
+}
+.slick-initialized .slick-slide {
+    display: block;
+    background-size: contain;   
+}
+.widget .listing-row-medium-image
+{
+	float:none;
+	width:100%;
+	height:auto;
+	background-color:#fff;
+}
+.widget .listing-row-medium-image:after
+{
+	content:none;
+}
+.widget .listing-row-medium-image img{
+	max-height: 150px;
+    margin: auto;
+    display: block;
+}
+.sidebar .listing-row-medium{
+    border-bottom: 0;
+    background: #fff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+.listing-row-medium-price {
+    background-color: #323232;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(50, 50, 50, 0.3);
+    color: #fff;    
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    margin: auto auto 10px auto;
+    padding: 4px 7px;
+    text-transform: uppercase;
+    vertical-align: top;
+    display: block;
+    text-align: center;
+    width: 90%;
+	word-wrap: break-word;
+}
+
+.pagination .page-item:first-child .page-link {
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+.checkbox label {
+   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.small-height{
+	height:350px;
+	overflow-y:scroll;
+}
+
+.remove-compare{
+	cursor:pointer;
+	color: #F74949;
+}
+
+.category-column h3 {   
+    font-size: 16px;   
+    font-weight: bold;
+	margin-bottom:7px;
+}
+.filter .overview{
+	border-bottom:1px solid rgba(0, 0, 0, 0.04);
+}
+.filter .overview.category-column{
+	padding-bottom:20px;
+}
+
+[type="checkbox"]{    
+    margin-right: 5px;
+}
+
+.listing-compare-description ul {
+    background-color: rgba(0, 0, 0, 0.04);
+    list-style: none;
+    margin: 214px 0 0 0;
+    padding: 0;
+}
+.listing-compare-list li{
+	height:46px;
+	line-height:normal;
+	/* older webkit */
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-justify-content: center;
+
+    /* older firefox */
+    display: -moz-box;
+    -moz-box-align: center;
+    -moz-box-pack: center;
+
+    /* IE10*/
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+
+    /* newer webkit */
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+
+    /* Standard Form - IE 11+, FF 22+, Chrome 29+, Opera 17+ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-treeview1
+{
+	padding:5px !important;
+}
+.treeview .list-group-item {
+    cursor: pointer;   
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.treeview span.indent{
+}
+.treeview span.icon.custom-node-icon{
+	display:none !important;
+}
+.node-selected{
+	font-weight:bold;
+}
