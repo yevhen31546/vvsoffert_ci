@@ -43,7 +43,7 @@ class Home extends CI_Controller {
 
         // Find Product 
         $productData = $this->Products_model->get($productId);
-        
+
         if (empty($productData)) {
 
             redirect(site_url('errors/error_404'));
@@ -53,7 +53,7 @@ class Home extends CI_Controller {
             $this->data['productData'] = $productData;
 
         }
-        
+
         // Group Data
         $groupData = $this->Groups_model->get($productData->groupName);
         if ($this->session->userdata('user_id') != '') {
@@ -82,19 +82,19 @@ class Home extends CI_Controller {
                 if ($item1->discountprice == $item2->discountprice) return 0;
                 return $item1->discountprice < $item2->discountprice ? -1 : 1;
             });
-            
+
         }
-    
+
         if(isset($_POST) && count($_POST) > 0) {
 
 
             //echo 'Got In';die();
 
-           /* $this->form_validation->set_rules('message', 'Message', 'trim|required');
+            /* $this->form_validation->set_rules('message', 'Message', 'trim|required');
 
-            if ($this->form_validation->run() == TRUE) {
+             if ($this->form_validation->run() == TRUE) {
 
-            }*/
+             }*/
 
             $data['name'] = $this->input->post('name');
             $data['email'] = $this->input->post('email');
@@ -112,32 +112,32 @@ class Home extends CI_Controller {
             //var_dump($data); die();
 
             $htmlContent = $this->load->view('email/offer', $data, TRUE);
-            
-            
 
-$this->email->to('info@vvsoffert.se');
+
+
+            $this->email->to('info@vvsoffert.se');
 //$this->email->to('nfury112@gmail.com');
-$this->email->from('info@vvsoffert.se','vvsoffert');
-$this->email->subject('Kontrollera Nytt Erbjudande.');
-$this->email->message($htmlContent);
+            $this->email->from('info@vvsoffert.se','vvsoffert');
+            $this->email->subject('Kontrollera Nytt Erbjudande.');
+            $this->email->message($htmlContent);
 
 //Send email
-             try {
-                    $this->email->send();
-                    $session_message['type'] = 1;
-                    $session_message['title'] = 'Success!';
-                    $session_message['content'] = 'Tack för din förfrågan, vi återkommer till Er med en offert.';
-                    $this->session->set_flashdata('message', $session_message);
-                } catch (Exception $e) {
-                    $session_message['type'] = 1;
-                    $session_message['title'] = 'Success!';
-                    $session_message['content'] = $e->getMessage();
-                    $this->session->set_flashdata('message', $session_message);
-                }
+            try {
+                $this->email->send();
+                $session_message['type'] = 1;
+                $session_message['title'] = 'Success!';
+                $session_message['content'] = 'Tack för din förfrågan, vi återkommer till Er med en offert.';
+                $this->session->set_flashdata('message', $session_message);
+            } catch (Exception $e) {
+                $session_message['type'] = 1;
+                $session_message['title'] = 'Success!';
+                $session_message['content'] = $e->getMessage();
+                $this->session->set_flashdata('message', $session_message);
+            }
 
 
         }
-        
+
 
 
         $this->data['otherStore'] = $otherStore;
@@ -145,7 +145,7 @@ $this->email->message($htmlContent);
         $this->data['relateProductData'] = $relateProductData;
         $this->data['user_id'] = $user_id = ($this->session->userdata('user_id') != '') ? $this->session->userdata('user_id') : 0;
         $this->data['all_list'] = $all_list = $this->ListMaster_model->get_by_user_id($this->session->userdata("user_id"));
-        
+
         $category1 = $this->Category_model->get($productData->category1);
         $category2 = $this->Category_model->get($productData->category2);
         $category3 = $this->Category_model->get($productData->category3);
@@ -164,26 +164,26 @@ $this->email->message($htmlContent);
         $data['response'] = false; //Set default response  
         $query = lookupProduct($keyword); //Search DB  
         $data['response'] = true;
-            $html_product = '<ul class="product-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Produkter</font></font></h4>';
+        $html_product = '<ul class="product-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Produkter</font></font></h4>';
         if (!empty($query)) {
             $data['response'] = true; //Set response  
             $data['message'] = array(); //Create array  
             foreach ($query as $row) {
                 $img_src=(file_exists($row->ImageName)) ? $row->ImageName : 'http://www.vvsoffert.se/scraper/' . $row->ImageName;
                 $html_product .= '<li>' .
-                                    '<a href="' . site_url() . 'product?pname=' . $row->Name . '&no=' . $row->id . '" class="">' .
-                                    '<img src="' . $img_src . '" alt="Vvs offert | Rörkalkyl | Vvskalkyl | Anbud | Vvspriser |Vvsoffert | Vvs online | Rörgrossist">' .
-                                    '<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">' . $row->Name . '</font></font></p>' .
-                                    '</a>' .
-                                '</li>';
+                    '<a href="' . site_url() . 'product?pname=' . $row->Name . '&no=' . $row->id . '" class="">' .
+                    '<img src="' . $img_src . '" alt="Vvs offert | Rörkalkyl | Vvskalkyl | Anbud | Vvspriser |Vvsoffert | Vvs online | Rörgrossist">' .
+                    '<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">' . $row->Name . '</font></font></p>' .
+                    '</a>' .
+                    '</li>';
             }
         }else{
             $html_product .= '<li>No Data</li>';
         }
-            $html_product .= '</ul>';
-            $data['html_product'] = $html_product;
+        $html_product .= '</ul>';
+        $data['html_product'] = $html_product;
         $query_category = lookupCategory($keyword); //Search DB  
-            $html_category = '<ul class="category-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Kategorier</font></font></h4>';
+        $html_category = '<ul class="category-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Kategorier</font></font></h4>';
         if (!empty($query_category)) {
             $data['response'] = true; //Set response   
             foreach ($query_category as $row) {
@@ -192,7 +192,7 @@ $this->email->message($htmlContent);
                     //c3no
                     $url=site_url().'Products?c3no='.$row->id;
                 }else if($row->pid!='' && $row->pid2==''){
-                   //c2no 
+                    //c2no
                     $url=site_url().'Products?c2no='.$row->id;
                 }else if($row->pid=='' && $row->pid2==''){
                     //cno
@@ -200,31 +200,31 @@ $this->email->message($htmlContent);
                 }
 //                <span class="parent-name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Underfloor heating system&gt; </font></font></span>
                 $html_category .= '<li>'.
-                '<a href="'.$url.'" class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$row->name.'</font></font></a>'.
-            '</li>';
+                    '<a href="'.$url.'" class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$row->name.'</font></font></a>'.
+                    '</li>';
             }
         }else{
             $html_category.='<li>No Data</li>';
         }
-            $html_category .= '</ul>';
-            $data['html_category'] = $html_category;
-            
+        $html_category .= '</ul>';
+        $data['html_category'] = $html_category;
+
         $query_manufacturer = lookupManufacturer($keyword); //Search DB  
-            $html_manufacturer = '<ul class="category-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Tillverkare</font></font></h4>';
+        $html_manufacturer = '<ul class="category-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Tillverkare</font></font></h4>';
         if (!empty($query_manufacturer)) {
             $data['response'] = true; //Set response   
             foreach ($query_manufacturer as $row) {
                 $count_products=countProductByManufacturer($row->id);
                 $url=site_url().'Products?search=&tillverkare='.$row->id;
                 $html_manufacturer .= '<li>'.
-                '<a href="'.$url.'" class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$row->name.' ( '.$count_products.' Produkter )</font></font></a>'.
-            '</li>';
+                    '<a href="'.$url.'" class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$row->name.' ( '.$count_products.' Produkter )</font></font></a>'.
+                    '</li>';
             }
         }else{
             $html_manufacturer.='<li>No Data</li>';
         }
-            $html_manufacturer .= '</ul>';
-            $data['html_manufacturer'] = $html_manufacturer;
+        $html_manufacturer .= '</ul>';
+        $data['html_manufacturer'] = $html_manufacturer;
         if ('IS_AJAX') {
             echo json_encode($data); //echo json string if ajax request  
         } else {
@@ -240,7 +240,7 @@ $this->email->message($htmlContent);
     }
 
     public function contactus() {
-       
+
 
         if ($this->input->post('submit')) {
 
@@ -260,23 +260,23 @@ $this->email->message($htmlContent);
                 $data['last_name'] = $this->input->post('last_name');
                 $data['contact'] = $this->input->post('contact');
                 $data['message'] = $this->input->post('message');
-                
-                
-                  $this->load->library('email');
 
-                    //SMTP & mail configuration
-                    /*$config = array(
-                        'protocol'  => 'smtp',
-                        'smtp_host' => 'send.one.com',
-                        'smtp_port' =>  25,
-                        'smtp_user' => 'info@vvsoffert.se',
-                        'smtp_pass' => 'Vv$offert@123',
-                        'mailtype'  => 'html',
-                        'charset'   => 'utf-8'
-                    );
-                    $this->email->initialize($config);
-                    $this->email->set_mailtype("html");
-                    $this->email->set_newline("\r\n");*/
+
+                $this->load->library('email');
+
+                //SMTP & mail configuration
+                /*$config = array(
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'send.one.com',
+                    'smtp_port' =>  25,
+                    'smtp_user' => 'info@vvsoffert.se',
+                    'smtp_pass' => 'Vv$offert@123',
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8'
+                );
+                $this->email->initialize($config);
+                $this->email->set_mailtype("html");
+                $this->email->set_newline("\r\n");*/
 
                 //Email content
                 $htmlContent = $this->load->view('email/contact-us-mail', $data, TRUE);
@@ -288,7 +288,7 @@ $this->email->message($htmlContent);
                 $this->email->message($htmlContent);
 
                 //Send email
-             try {
+                try {
                     $this->email->send();
                     $session_message['type'] = 1;
                     $session_message['title'] = 'Success!';
@@ -308,22 +308,22 @@ $this->email->message($htmlContent);
         $this->data['content'] = $this->load->view('pages/contact', $this->data, true);
         $this->load->view('layout', $this->data);
     }
-    
+
     public function terms() {
-       $this->load->model('Cms_model');
-       $cmsInfo = $this->Cms_model->find('terms_and_conditions');
-       $this->data['cmsInfo'] = $cmsInfo;
-       $this->data['productsList'] = "TERMS and condition";
-       $this->data['content'] = $this->load->view('pages/terms', $this->data, true);
-       $this->load->view('layout', $this->data);
+        $this->load->model('Cms_model');
+        $cmsInfo = $this->Cms_model->find('terms_and_conditions');
+        $this->data['cmsInfo'] = $cmsInfo;
+        $this->data['productsList'] = "TERMS and condition";
+        $this->data['content'] = $this->load->view('pages/terms', $this->data, true);
+        $this->load->view('layout', $this->data);
     }
-    
+
     public function nyheter() {
-       $this->load->model('Cms_model');
-       $cmsInfo = $this->Cms_model->find('nyheter');
-       $this->data['cmsInfo'] = $cmsInfo;
-       $this->data['content'] = $this->load->view('pages/nyheter', $this->data, true);
-       $this->load->view('layout', $this->data);
+        $this->load->model('Cms_model');
+        $cmsInfo = $this->Cms_model->find('nyheter');
+        $this->data['cmsInfo'] = $cmsInfo;
+        $this->data['content'] = $this->load->view('pages/nyheter', $this->data, true);
+        $this->load->view('layout', $this->data);
     }
 
     public function lookup() {
@@ -414,36 +414,31 @@ $this->email->message($htmlContent);
                 $quote_buyertype = $this->input->post('quote_buyertype');
                 $data['quote_buyertype'] = $buyertype[$quote_buyertype];
 
+                //SMTP & mail configuration
+                $this->load->config('email');
                 $this->load->library('email');
 
-                //SMTP & mail configuration
-                /*$config = array(
-                    'protocol'  => 'smtp',
-                    'smtp_host' => 'send.one.com',
-                    'smtp_port' =>  25,
-                    'smtp_user' => 'info@vvsoffert.se',
-                    'smtp_pass' => 'Vv$offert@123',
-                    'mailtype'  => 'html',
-                    'charset'   => 'utf-8'
-                );
-                $this->email->initialize($config);
-                $this->email->set_mailtype("html");
-                $this->email->set_newline("\r\n");*/
+                $from = $this->config->item('smtp_user');
+                $to = 'info@vvsoffert.se';
 
                 //Email content
                 $htmlContent = $this->load->view('email/inquere-email', $data, TRUE);
 
-                $this->email->to('info@vvsoffert.se');
-                $this->email->from($data['quote_email'],'vvsoffert');
+                //$this->email->set_mailtype("html");
+                //$this->email->set_header('Content-Type', 'text/html');
+                $this->email->clear();
+                $this->email->from($from, 'vvsoffert');
+                $this->email->to($to);
                 $this->email->subject('Få offert från rörmokare!!');
                 $this->email->message($htmlContent);
 
                 //Send email
                 try {
                     $this->email->send();
+                    //echo $this->email->print_debugger(); exit;
                     $session_message['type'] = 1;
                     $session_message['title'] = 'Success!';
-                    $session_message['content'] = 'Tack för att du kontaktade oss. Vi kommer snart tillbaka';
+                    $session_message['content'] = 'Tack för din förfrågan, vi återkommer till Er med en offert.';
                     $this->session->set_flashdata('message', $session_message);
                 } catch (Exception $e) {
                     $session_message['type'] = 1;
@@ -481,7 +476,7 @@ $this->email->message($htmlContent);
             $error = [];
 
             $this->load->library('form_validation');
-            
+
 
             $this->form_validation->set_rules('name', 'Namn', 'trim|required');
             $this->form_validation->set_rules('contact', 'Telefon Nummer', 'trim|regex_match[/^[0-9+.-]*$/]');
@@ -524,49 +519,49 @@ $this->email->message($htmlContent);
                 );
 
 
-               $this->FrontendUser_model->insert($user_master_data);
+                $this->FrontendUser_model->insert($user_master_data);
 
 
 //                    Events::trigger('new_user_registration_success', $user_master_data);
 
 
-                    $this->load->library('email');
+                $this->load->library('email');
 
 //SMTP & mail configuration
-/*$config = array(
-    'protocol'  => 'smtp',
-    'smtp_host' => 'send.one.com',
-    'smtp_port' =>  25,
-    'smtp_user' => 'info@vvsoffert.se',
-    'smtp_pass' => 'Vv$offert@123',
-    'mailtype'  => 'html',
-    'charset'   => 'utf-8'
-);
-$this->email->initialize($config);
-$this->email->set_mailtype("html");
-$this->email->set_newline("\r\n");*/
+                /*$config = array(
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'send.one.com',
+                    'smtp_port' =>  25,
+                    'smtp_user' => 'info@vvsoffert.se',
+                    'smtp_pass' => 'Vv$offert@123',
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8'
+                );
+                $this->email->initialize($config);
+                $this->email->set_mailtype("html");
+                $this->email->set_newline("\r\n");*/
 
 //Email content
-$htmlContent = $this->load->view('email/registrationmail', $user_master_data, TRUE);
+                $htmlContent = $this->load->view('email/registrationmail', $user_master_data, TRUE);
 //$htmlContent = "You are successfully Registered Now";
 
-$this->email->to($email);
-$this->email->from('info@vvsoffert.se','vvsoffert');
-$this->email->subject('Du är framgångsrik registrerad');
-$this->email->message($htmlContent);
-try {
+                $this->email->to($email);
+                $this->email->from('info@vvsoffert.se','vvsoffert');
+                $this->email->subject('Du är framgångsrik registrerad');
+                $this->email->message($htmlContent);
+                try {
                     $this->email->send();
                     $this->ajax_response['type'] = 'success';
-                $this->ajax_response['message'] = 'You have successfully sign up successfully.Please Wait for Admin Approval.';
-                $this->ajax_response['url'] = site_url('/');
+                    $this->ajax_response['message'] = 'You have successfully sign up successfully.Please Wait for Admin Approval.';
+                    $this->ajax_response['url'] = site_url('/');
                     $session_message['type'] = 1;
                     $session_message['title'] = 'Success!';
                     $session_message['content'] = 'Tack för att du kontaktade oss. Vi kommer snart tillbaka';
                     $this->session->set_flashdata('message', $session_message);
                 } catch (Exception $e) {
                     $this->ajax_response['type'] = 'success';
-                $this->ajax_response['message'] = 'You have successfully sign up successfully.Please Wait for Admin Approval.';
-                $this->ajax_response['url'] = site_url('/');
+                    $this->ajax_response['message'] = 'You have successfully sign up successfully.Please Wait for Admin Approval.';
+                    $this->ajax_response['url'] = site_url('/');
                     $session_message['type'] = 1;
                     $session_message['title'] = 'Success!';
                     $session_message['content'] = $e->getMessage();
@@ -574,7 +569,7 @@ try {
                 }
 
 
-                
+
 
 //                    $this->ajax_response['message'] = "We've just sent a confirmation link to <strong>$email</strong>. Just click the link in that email & you're in!";
             } else {
@@ -592,7 +587,7 @@ try {
     }
 
     public function dosignup11() {
-  
+
         if (IS_AJAX) {
             if (!$this->auth->is_login()) {
                 $this->form_validation->set_rules('FName', 'First Name', 'trim|required');
@@ -659,9 +654,9 @@ try {
         }
         $this->render_ajax_response();
     }
-    
+
     public function token() {
-        
+
         $this->ajax_response['type'] = 'success';
         $this->ajax_response['message'] = 'API Token Verification.';
         $this->ajax_response['code'] = '112';
@@ -675,36 +670,36 @@ try {
         if ($this->input->is_ajax_request()) {
             $this->load->library('form_validation');
             //if (!$this->auth->is_login()) {
-                $this->form_validation->set_rules('customer_sel', 'First Name', 'trim|required');
-                if ($this->form_validation->run() == true) {
+            $this->form_validation->set_rules('customer_sel', 'First Name', 'trim|required');
+            if ($this->form_validation->run() == true) {
 
-                    //$this->load->model('Invoice_histories_model');
-                    $data['user_id'] = $this->session->userdata("user_id");
-                    $data['customer_sel'] = $this->input->post('customer_sel');
-                    $data['email'] = $this->input->post('email');
-                    $data['address'] = $this->input->post('address');
-                    $data['city'] = $this->input->post('city');
-                    $data['special_comments'] = $this->input->post('special_comments');
-                    $data['invoice_number'] = $this->input->post('invoice_number');
-                    $data['store_name'] = $this->input->post('store_name');
-                    $data['selected_products'] = $this->input->post('selected_products');
-                    $data['invoice_type'] = $this->input->post('invoice_type');
-                    $data['date_value'] = $this->input->post('date_value');
-                    
-                    $inserted_id =$this->Invoice_histories_model->insert($data);
+                //$this->load->model('Invoice_histories_model');
+                $data['user_id'] = $this->session->userdata("user_id");
+                $data['customer_sel'] = $this->input->post('customer_sel');
+                $data['email'] = $this->input->post('email');
+                $data['address'] = $this->input->post('address');
+                $data['city'] = $this->input->post('city');
+                $data['special_comments'] = $this->input->post('special_comments');
+                $data['invoice_number'] = $this->input->post('invoice_number');
+                $data['store_name'] = $this->input->post('store_name');
+                $data['selected_products'] = $this->input->post('selected_products');
+                $data['invoice_type'] = $this->input->post('invoice_type');
+                $data['date_value'] = $this->input->post('date_value');
 
-                    $this->ajax_response['type'] = 'success';
-                    $this->ajax_response['insertedID'] = $inserted_id;
-                    $this->ajax_response['message'] = "We've just sent a confirmation link to <strong>$inserted_id</strong>. Just click the link in that email & you're in!";
-                } else {
-                    
-                    $this->ajax_response['type'] = 'warning';
-                    $error = [];
-                    foreach ($this->form_validation->error_array() as $key => $val) {
-                        $error[$key] = $val;
-                    }
-                    $this->ajax_response['message'] = $error;
+                $inserted_id =$this->Invoice_histories_model->insert($data);
+
+                $this->ajax_response['type'] = 'success';
+                $this->ajax_response['insertedID'] = $inserted_id;
+                $this->ajax_response['message'] = "We've just sent a confirmation link to <strong>$inserted_id</strong>. Just click the link in that email & you're in!";
+            } else {
+
+                $this->ajax_response['type'] = 'warning';
+                $error = [];
+                foreach ($this->form_validation->error_array() as $key => $val) {
+                    $error[$key] = $val;
                 }
+                $this->ajax_response['message'] = $error;
+            }
             //}
         }
         echo json_encode($this->ajax_response);
