@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'https://vvsoffert.se/';
-$config['base_url'] = 'http://dev.vvsoffert11.com/';
+$config['base_url'] = 'http://dev.vvsoffert12.com/';
 
 /*
 |--------------------------------------------------------------------------

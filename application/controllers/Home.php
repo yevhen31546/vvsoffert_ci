@@ -264,30 +264,30 @@ $this->email->message($htmlContent);
                 
                   $this->load->library('email');
 
-//SMTP & mail configuration
-/*$config = array(
-    'protocol'  => 'smtp',
-    'smtp_host' => 'send.one.com',
-    'smtp_port' =>  25,
-    'smtp_user' => 'info@vvsoffert.se',
-    'smtp_pass' => 'Vv$offert@123',
-    'mailtype'  => 'html',
-    'charset'   => 'utf-8'
-);
-$this->email->initialize($config);
-$this->email->set_mailtype("html");
-$this->email->set_newline("\r\n");*/
+                    //SMTP & mail configuration
+                    /*$config = array(
+                        'protocol'  => 'smtp',
+                        'smtp_host' => 'send.one.com',
+                        'smtp_port' =>  25,
+                        'smtp_user' => 'info@vvsoffert.se',
+                        'smtp_pass' => 'Vv$offert@123',
+                        'mailtype'  => 'html',
+                        'charset'   => 'utf-8'
+                    );
+                    $this->email->initialize($config);
+                    $this->email->set_mailtype("html");
+                    $this->email->set_newline("\r\n");*/
 
-//Email content
-$htmlContent = $this->load->view('email/contact-us-mail', $data, TRUE);
+                //Email content
+                $htmlContent = $this->load->view('email/contact-us-mail', $data, TRUE);
 
-$this->email->to('pinaler@gmail.com');
-//$this->email->to('tamal.majumder@infoway.us');
-$this->email->from('info@vvsoffert.se','vvsoffert');
-$this->email->subject('Kontakta Meddelande mottaget!!');
-$this->email->message($htmlContent);
+                $this->email->to('pinaler@gmail.com');
+                //$this->email->to('tamal.majumder@infoway.us');
+                $this->email->from('info@vvsoffert.se','vvsoffert');
+                $this->email->subject('Kontakta Meddelande mottaget!!');
+                $this->email->message($htmlContent);
 
-//Send email
+                //Send email
              try {
                     $this->email->send();
                     $session_message['type'] = 1;
@@ -301,7 +301,7 @@ $this->email->message($htmlContent);
                     $this->session->set_flashdata('message', $session_message);
                 }
             }
-//            }
+            //            }
         }
 
         $this->data['productsList'] = "TERMS and condition";
@@ -360,6 +360,100 @@ $this->email->message($htmlContent);
     }
 
     public function index() {
+
+        // Inquere form submit
+        if ($this->input->post('submit')) {
+
+            $category = array(
+                '1' => 'Badrumsrenovering',
+                '2' => 'Köksrenovering',
+                '3' => 'Stambyte',
+                '4' => 'Vatten',
+                '5' => 'VVS-arbeten / Rördragning',
+                '6' => 'Värmepumpar'
+            );
+
+            $timespan = array(
+                '1' => 'Klart inom en vecka',
+                '2' => 'Klart inom en månad',
+                '3' => 'Klart inom 3 månader',
+                '4' => 'Klart inom ett halvår',
+                '5' => 'Klart inom ett år'
+            );
+
+            $buyertype = array(
+                '1' => 'Privatperson',
+                '2' => 'Företag',
+                '3' => 'Entreprenör/Byggare',
+                '4' => 'Bostadsrättsförening',
+                '5' => 'Annan förening',
+                '6' => 'Myndighet/Kommun'
+            );
+
+            $this->form_validation->set_rules('quote_description', 'description', 'trim|required');
+            $this->form_validation->set_rules('quote_zip', 'zip', 'trim|required');
+            $this->form_validation->set_rules('quote_name', 'name', 'trim|required');
+            $this->form_validation->set_rules('quote_email', 'email', 'trim|required|valid_email');
+            $this->form_validation->set_rules('quote_phone', 'phone', 'trim|required|regex_match[/^[0-9+.-]*$/]');
+            $this->form_validation->set_rules('quote_terms', 'terms', 'trim|required');
+
+            if ($this->form_validation->run() == TRUE) {
+
+                $data['quote_description'] = $this->input->post('quote_description');
+                $data['quote_zip'] = $this->input->post('quote_zip');
+                $data['quote_name'] = $this->input->post('quote_name');
+                $data['quote_email'] = $this->input->post('quote_email');
+                $data['quote_phone'] = $this->input->post('quote_phone');
+
+                $quote_category = $this->input->post('quote_category');
+                $data['quote_category'] = $category[$quote_category];
+
+                $quote_timespan = $this->input->post('quote_timespan');
+                $data['quote_timespan'] = $timespan[$quote_timespan];
+
+                $quote_buyertype = $this->input->post('quote_buyertype');
+                $data['quote_buyertype'] = $buyertype[$quote_buyertype];
+
+                $this->load->library('email');
+
+                //SMTP & mail configuration
+                /*$config = array(
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'send.one.com',
+                    'smtp_port' =>  25,
+                    'smtp_user' => 'info@vvsoffert.se',
+                    'smtp_pass' => 'Vv$offert@123',
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8'
+                );
+                $this->email->initialize($config);
+                $this->email->set_mailtype("html");
+                $this->email->set_newline("\r\n");*/
+
+                //Email content
+                $htmlContent = $this->load->view('email/inquere-email', $data, TRUE);
+
+                $this->email->to('info@vvsoffert.se');
+                $this->email->from($data['quote_email'],'vvsoffert');
+                $this->email->subject('Få offert från rörmokare!!');
+                $this->email->message($htmlContent);
+
+                //Send email
+                try {
+                    $this->email->send();
+                    $session_message['type'] = 1;
+                    $session_message['title'] = 'Success!';
+                    $session_message['content'] = 'Tack för att du kontaktade oss. Vi kommer snart tillbaka';
+                    $this->session->set_flashdata('message', $session_message);
+                } catch (Exception $e) {
+                    $session_message['type'] = 1;
+                    $session_message['title'] = 'Success!';
+                    $session_message['content'] = $e->getMessage();
+                    $this->session->set_flashdata('message', $session_message);
+                }
+            }
+        }
+
         $this->data = array();
         $this->data['content'] = $this->load->view('pages/home', $this->data, true);
         $this->load->view('layout', $this->data);

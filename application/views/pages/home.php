@@ -3,59 +3,191 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/magnific-popup.css'); ?>">
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({
-google_ad_client: "ca-pub-3988943093889951",
-enable_page_level_ads: true
-});
-</script>
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<!--<script>-->
+<!--(adsbygoogle = window.adsbygoogle || []).push({-->
+<!--google_ad_client: "ca-pub-3988943093889951",-->
+<!--enable_page_level_ads: true-->
+<!--});-->
+<!--</script>-->
 
 
 <section class="gallery_tabs site_products">
     <div class="slider_products container">
         <div style="background: #18435f; border-top: 5px solid #1e9f2e; color: #ffffff;" class="row">
             <div class="col-sm-12 col-xs-12">
-                <h2 class="hidden-xs" style="font-family: Helvetica; text-align: center; color: #eee;">VVS Branschens Portal</h2>
-                <h2 class="hidden-lg hidden-md hidden-sm" style="font-family: Helvetica; font-size: 200%; text-align: center; color: #eee;">VVS Branschens Portal</h2>
-                <br>
-            <h4 id="vvs-offert-banner" class="hidden-xs" style="padding-left: 10px; font-family: Helvetica; font-size: 160%; line-height: 30px; text-align: center;"><img style="display: inline-block;" src="<?php echo site_url('assets/img/logo.png'); ?>" class="img-responsive" alt="Vvs offert | Rörkalkyl | Vvskalkyl | Anbud | Vvspriser |Vvsoffert | Vvs online | Rörgrossist" width="168" height="26">&nbsp;samlar leverantörerna på ett och samma ställe, så att du får en full överblick över marknaden. Du sparar därför både tid och resurser.</h4>
-            <h4 id="vvs-offert-banner-m" class="hidden-lg hidden-md hidden-sm" style="padding-left: 10px; font-family: Helvetica; font-size: 145%; line-height: 30px; text-align: center;"><img style="display: inline-block;" src="<?php echo site_url('assets/img/logo.png'); ?>" class="img-responsive" alt="Vvs offert | Rörkalkyl | Vvskalkyl | Anbud | Vvspriser |Vvsoffert | Vvs online | Rörgrossist" width="168" height="30">&nbsp;samlar leverantörerna på ett och samma ställe, så att du får en full överblick över marknaden. Du sparar därför både tid och resurser.</h4>
+                <h4 id="vvs-offert-banner" class="hidden-xs" style="padding-left: 10px; margin-top: 20px;
+                font-family: Helvetica; font-size: 160%; line-height: 30px; display: flex !important;">
+                    <img style="display: inline-block;" src="<?php echo site_url('assets/img/logo.png'); ?>"
+                         class="img-responsive" alt="Vvs offert | Rörkalkyl | Vvskalkyl | Anbud | Vvspriser
+                         |Vvsoffert | Vvs online | Rörgrossist" width="168" height="26">
+                    &nbsp;<div style="margin-top: 5px;">Få offert från rörmokare</div>
+                </h4>
             </div>
-                    <div class="col-sm-offset-1 col-sm-10 col-xs-12" style="padding-left: 20px; padding-right: 20px;padding-top: 20px; margin-bottom: 20px; text-align: center;">
-                        <img style="border-radius: 5px; max-width: 876px;" src="<?php echo site_url('assets/banner_images/vvs-offert-final-banner.png'); ?>" width="100%" height="auto">
+
+            <!-- Inquere form start -->
+            <?php echo form_open(); ?>
+
+                <div class="col-sm-offset-1 col-sm-10 col-xs-12"
+                     style="padding-left: 20px; padding-right: 20px;padding-top: 20px; margin-bottom: 20px;">
+                <?php
+                $array = $this->session->flashdata('message');
+                if (!empty($array)) {
+                    ?>
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        <strong>Framgång!</strong> <?php echo $array['content']; ?>
                     </div>
-                    <div class="col-sm-12 hidden-xs">
-                            
-                    <div style="border: none; background: inherit; padding-top: 20px; text-align: center; padding-bottom: 30px;" class="generic_content active clearfix">
-                            
-                            
-                           
-                            <div class="generic_feature_list">
-                                <div class="generic_price_btn clearfix">
-                                    <a onclick="setVideoStage()" id="user-guide-video" class="video video_popup" style="font-family: Helvetica; -webkit-border-radius: 50px; background: #ffffff; display: inline-block; font-size: 16px;outline: medium none; padding: 10px 20px; text-decoration: none; text-transform: uppercase; color: #0595f3;" href="<?php echo site_url('assets/videos/VVS_Offert_User_Guide.mp4'); ?>"><i class="fa fa-film"></i> <b>Så fungerar det</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="" style="font-family: Helvetica; -webkit-border-radius: 50px; background: #1e9f2e; display: inline-block; font-size: 16px;outline: medium none; padding: 10px 20px; text-decoration: none; text-transform: uppercase; color: #ffffff;" href="<?php echo site_url('registrera'); ?>"><b>Prova gratis</b> <i class="fa fa-forward"></i></a>
-                                </div>
-                            </div>
-                           
-                            
-                        </div>
+
+                    <?php
+                    $this->session->unset_userdata('message');
+                }
+                ?>
+                <!-- quote category -->
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-3">
+                        <label for="quote_category">Vad behöver du hjälp med?</label>
+                        <select class="form-control" id="quote_category" name="quote_category">
+                            <option value="1" <?php echo  set_select('quote_cateogry', '1', TRUE); ?>>
+                                Badrumsrenovering
+                            </option>
+                            <option value="2" <?php echo  set_select('quote_cateogry', '2'); ?>>
+                                Köksrenovering
+                            </option>
+                            <option value="3" <?php echo  set_select('quote_cateogry', '3'); ?>>
+                                Stambyte
+                            </option>
+                            <option value="4" <?php echo  set_select('quote_cateogry', '4'); ?>>
+                                Vatten
+                            </option>
+                            <option value="5" <?php echo  set_select('quote_cateogry', '5'); ?>>
+                                VVS-arbeten / Rördragning
+                            </option>
+                            <option value="6" <?php echo  set_select('quote_cateogry', '6'); ?>>
+                                Värmepumpar
+                            </option>
+                        </select>
                     </div>
-                    <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-                            
-                    <div style="border: none; background: inherit; padding-top: 20px; text-align: center; padding-bottom: 30px;" class="generic_content active clearfix">
-                            
-                            
-                            FEATURE LIST START
-                            <div class="generic_feature_list">
-                                <div class="generic_price_btn clearfix">
-                                    <a onclick="setVideoStageM()" id="user-guide-video-m" class="video video_popup" style="font-family: Helvetica; -webkit-border-radius: 20px; background: #ffffff; display: inline-block; font-size: 12px;outline: medium none; padding: 8px 8px; text-decoration: none; text-transform: uppercase; color: #0595f3;" href="<?php echo site_url('assets/videos/VVS_Offert_User_Guide.mp4'); ?>"><i class="fa fa-film"></i> <b>Så fungerar det</b></a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="" style="font-family: Helvetica; -webkit-border-radius: 20px; background: #1e9f2e; display: inline-block; font-size: 12px;outline: medium none; padding: 8px 8px; text-decoration: none; text-transform: uppercase; color: #ffffff;" href="<?php echo site_url('registrera'); ?>"><b>Prova gratis</b> <i class="fa fa-forward"></i></a>
-                                </div>
-                            </div>
-                            //FEATURE LIST END
-                            
-                        </div>
+                </div>
+                <!-- quote description -->
+                <div class="row">
+                    <div class="form-group col-md-12 col-sm-6">
+                        <label for="quote_description">Beskrivning av arbetet</label>
+                        <textarea class="form-control" rows="4" name="quote_description"
+                                  placeholder="Tips: En bra och tydlig beskrivning möjliggör fler och bättre svar"
+                                  id="quote_description"><?php echo set_value('quote_description'); ?></textarea>
                     </div>
+                    <span class="text-danger error-msg" ><?php echo form_error('quote_description') ?></span>
+                </div>
+                <!-- quote zip and timespan -->
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-3">
+                        <label for="quote_zip">Postnummer</label>
+                        <input type="text" class="form-control" id="quote_zip" name="quote_zip"
+                               value="<?php echo set_value('quote_zip'); ?>">
+                        <span class="text-danger error-msg" ><?php echo form_error('quote_zip') ?></span>
+                    </div>
+
+                    <div class="form-group col-md-6 col-sm-3">
+                        <label for="quote_timespan">När ska arbetet vara klart?</label>
+                        <select class="form-control" id="quote_timespan" name="quote_timespan">
+                            <option value="1" <?php echo  set_select('quote_timespan', '1', TRUE); ?>>
+                                Klart inom en vecka
+                            </option>
+                            <option value="2" <?php echo  set_select('quote_timespan', '2'); ?>>
+                                Klart inom en månad
+                            </option>
+                            <option value="3" <?php echo  set_select('quote_timespan', '3'); ?>>
+                                Klart inom 3 månader
+                            </option>
+                            <option value="4" <?php echo  set_select('quote_timespan', '4'); ?>>
+                                Klart inom ett halvår
+                            </option>
+                            <option value="5" <?php echo  set_select('quote_timespan', '5'); ?>>
+                                Klart inom ett år
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- quote buyertype and name -->
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-6">
+                        <label for="quote_buyertype">Vem representerar du?</label>
+                        <select class="form-control" id="quote_buyertype" name="quote_buyertype">
+                            <option value="1" <?php echo  set_select('quote_buyertype', '1', TRUE); ?>>
+                                Privatperson
+                            </option>
+                            <option value="2" <?php echo  set_select('quote_buyertype', '2'); ?>>
+                                Företag
+                            </option>
+                            <option value="3" <?php echo  set_select('quote_buyertype', '3'); ?>>
+                                Entreprenör/Byggare
+                            </option>
+                            <option value="4" <?php echo  set_select('quote_buyertype', '4'); ?>>
+                                Bostadsrättsförening
+                            </option>
+                            <option value="5" <?php echo  set_select('quote_buyertype', '5'); ?>>
+                                Annan förening
+                            </option>
+                            <option value="6" <?php echo  set_select('quote_buyertype', '6'); ?>>
+                                Myndighet/Kommun
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6 col-sm-6">
+                        <label for="quote_name">Ditt namn</label>
+                        <input type="text" class="form-control" id="quote_name" name="quote_name"
+                               value="<?php echo set_value('quote_name'); ?>">
+                        <span class="text-danger error-msg" ><?php echo form_error('quote_name') ?></span>
+                    </div>
+                </div>
+                <!-- quote email and phone -->
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-3">
+                        <label for="quote_email">Epost adress</label>
+                        <input type="text" class="form-control" id="quote_email" name="quote_email"
+                               value="<?php echo set_value('quote_email'); ?>">
+                        <span class="text-danger error-msg" ><?php echo form_error('quote_email') ?></span>
+                    </div>
+
+                    <div class="form-group col-md-6 col-sm-3">
+                        <label for="quote_phone">Telefon</label>
+                        <input type="text" class="form-control" id="quote_phone" name="quote_phone"
+                               value="<?php echo set_value('quote_phone'); ?>">
+                        <span class="text-danger error-msg" ><?php echo form_error('quote_phone') ?></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" name="quote_terms" id="quote_terms"
+                           value="Accept TOS" <?php echo set_checkbox('quote_terms', 'Accept TOS'); ?> />
+                    <label for="quote_terms">
+                        &nbsp;Jag godkänner att vvsoffert.se lagrar och använder mina personuppgifter enligt
+                        <a href="<?php echo base_url()."tos.pdf"; ?>" target="_blank" title="Läs avtalsvillkoren">
+                            användarvillkoren.
+                        </a>
+                    </label>
+                    <span class="text-danger error-msg" ><?php echo form_error('quote_terms') ?></span>
+                </div>
             </div>
+
+            <div class="col-sm-12 hidden-xs">
+
+            <div style="border: none; background: inherit; padding-top: 20px; text-align: center;
+            padding-bottom: 30px;" class="generic_content active clearfix">
+                <div class="generic_feature_list">
+                    <div class="generic_price_btn clearfix">
+                        <input type="submit" name="submit" class="btn btn-success" value="SKICKA FÖRFRÅGAN">
+                    </div>
+                </div>
+            </div>
+
+            <?php echo form_close(); ?>
+            <!-- Inquere form end -->
+
+        </div>
+    </div>
 </section>
 <section class="site_products">
     <div class="product_header">

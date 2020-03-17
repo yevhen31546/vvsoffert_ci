@@ -4,13 +4,13 @@
     .mst6{color:red;}
 </style>
 
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({
-google_ad_client: "ca-pub-3988943093889951",
-enable_page_level_ads: true
-});
-</script>
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<!--<script>-->
+<!--(adsbygoogle = window.adsbygoogle || []).push({-->
+<!--google_ad_client: "ca-pub-3988943093889951",-->
+<!--enable_page_level_ads: true-->
+<!--});-->
+<!--</script>-->
 
 <div class="search_listing_screen"><!--start search listing screen--->
     <div class="container"> <!--start search listing screen container--->
