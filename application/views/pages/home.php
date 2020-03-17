@@ -172,7 +172,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 hidden-xs">
+<!--            <div class="col-sm-12 hidden-xs">-->
 
                 <div style="border: none; background: inherit; padding-top: 20px; text-align: center;
             padding-bottom: 30px;" class="generic_content active clearfix">

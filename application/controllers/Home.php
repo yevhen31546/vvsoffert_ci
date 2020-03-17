@@ -159,15 +159,15 @@ class Home extends CI_Controller {
     }
 
     public function searchProductAjax() {
-        // process posted form data  
+        // process posted form data
         $keyword = $this->input->post('term');
-        $data['response'] = false; //Set default response  
-        $query = lookupProduct($keyword); //Search DB  
+        $data['response'] = false; //Set default response
+        $query = lookupProduct($keyword); //Search DB
         $data['response'] = true;
         $html_product = '<ul class="product-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Produkter</font></font></h4>';
         if (!empty($query)) {
-            $data['response'] = true; //Set response  
-            $data['message'] = array(); //Create array  
+            $data['response'] = true; //Set response
+            $data['message'] = array(); //Create array
             foreach ($query as $row) {
                 $img_src=(file_exists($row->ImageName)) ? $row->ImageName : 'http://www.vvsoffert.se/scraper/' . $row->ImageName;
                 $html_product .= '<li>' .
@@ -182,10 +182,10 @@ class Home extends CI_Controller {
         }
         $html_product .= '</ul>';
         $data['html_product'] = $html_product;
-        $query_category = lookupCategory($keyword); //Search DB  
+        $query_category = lookupCategory($keyword); //Search DB
         $html_category = '<ul class="category-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Kategorier</font></font></h4>';
         if (!empty($query_category)) {
-            $data['response'] = true; //Set response   
+            $data['response'] = true; //Set response
             foreach ($query_category as $row) {
                 $url='javascript:;';
                 if($row->pid!='' && $row->pid2!=''){
@@ -209,10 +209,10 @@ class Home extends CI_Controller {
         $html_category .= '</ul>';
         $data['html_category'] = $html_category;
 
-        $query_manufacturer = lookupManufacturer($keyword); //Search DB  
+        $query_manufacturer = lookupManufacturer($keyword); //Search DB
         $html_manufacturer = '<ul class="category-results"><h4 class="stl-head"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: 600;">Tillverkare</font></font></h4>';
         if (!empty($query_manufacturer)) {
-            $data['response'] = true; //Set response   
+            $data['response'] = true; //Set response
             foreach ($query_manufacturer as $row) {
                 $count_products=countProductByManufacturer($row->id);
                 $url=site_url().'Products?search=&tillverkare='.$row->id;
@@ -226,7 +226,7 @@ class Home extends CI_Controller {
         $html_manufacturer .= '</ul>';
         $data['html_manufacturer'] = $html_manufacturer;
         if ('IS_AJAX') {
-            echo json_encode($data); //echo json string if ajax request  
+            echo json_encode($data); //echo json string if ajax request
         } else {
             $data['message'][] = array(
                 'id' => '',
@@ -235,7 +235,7 @@ class Home extends CI_Controller {
                 'category1' => '',
                 'manufacturer_name' => '',
                 ''
-            );  //Add a row to array  
+            );  //Add a row to array
         }
     }
 
@@ -327,13 +327,13 @@ class Home extends CI_Controller {
     }
 
     public function lookup() {
-        // process posted form data  
+        // process posted form data
         $keyword = $this->input->post('term');
-        $data['response'] = 'false'; //Set default response  
-        $query = lookup($keyword); //Search DB  
+        $data['response'] = 'false'; //Set default response
+        $query = lookup($keyword); //Search DB
         if (!empty($query)) {
-            $data['response'] = 'true'; //Set response  
-            $data['message'] = array(); //Create array  
+            $data['response'] = 'true'; //Set response
+            $data['message'] = array(); //Create array
             foreach ($query as $row) {
                 $data['message'][] = array(
                     'id' => $row->id,
@@ -342,11 +342,11 @@ class Home extends CI_Controller {
                     'category1' => $row->category1,
                     'manufacturer_name' => $row->manufacturer_name,
                     ''
-                );  //Add a row to array  
+                );  //Add a row to array
             }
         }
         if ('IS_AJAX') {
-            echo json_encode($data); //echo json string if ajax request  
+            echo json_encode($data); //echo json string if ajax request
         } else {
             $data['message'][] = array(
                 'id' => '',
@@ -355,7 +355,7 @@ class Home extends CI_Controller {
                 'category1' => '',
                 'manufacturer_name' => '',
                 ''
-            );  //Add a row to array  
+            );  //Add a row to array
         }
     }
 
@@ -390,12 +390,16 @@ class Home extends CI_Controller {
                 '6' => 'Myndighet/Kommun'
             );
 
-            $this->form_validation->set_rules('quote_description', 'description', 'trim|required');
-            $this->form_validation->set_rules('quote_zip', 'zip', 'trim|required');
-            $this->form_validation->set_rules('quote_name', 'name', 'trim|required');
-            $this->form_validation->set_rules('quote_email', 'email', 'trim|required|valid_email');
-            $this->form_validation->set_rules('quote_phone', 'phone', 'trim|required|regex_match[/^[0-9+.-]*$/]');
-            $this->form_validation->set_rules('quote_terms', 'terms', 'trim|required');
+            $this->form_validation->set_message('required', '%s behöver fyllas i.');
+            // $this->form_validation->set_message('valid_email', '%s krävs.');
+            // $this->form_validation->set_message('regex_match', '%s krävs.');
+
+            $this->form_validation->set_rules('quote_description', 'Beskrivning', 'trim|required');
+            $this->form_validation->set_rules('quote_zip', 'Postnummer', 'trim|required');
+            $this->form_validation->set_rules('quote_name', 'Namn', 'trim|required');
+            $this->form_validation->set_rules('quote_email', 'E-post', 'trim|required|valid_email');
+            $this->form_validation->set_rules('quote_phone', 'Telefon', 'trim|required|regex_match[/^[0-9+.-]*$/]');
+            $this->form_validation->set_rules('quote_terms', 'Användarvillkor', 'trim|required');
 
             if ($this->form_validation->run() == TRUE) {
 

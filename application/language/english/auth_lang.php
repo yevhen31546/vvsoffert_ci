@@ -16,4 +16,6 @@ $lang['fp_content'] = 'We\'ve sent an email to %1$s. Please click on the passwor
 $lang['rp_title'] = 'Success';
 $lang['rp_content'] = 'Your password has been successfully changed. You can login with your new password.';
 
+// Validation Messages
+$lang['required'] = 'The %1$s field is required.';
 ?>
